@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/StarCollector.iml" filepath="$PROJECT_DIR$/StarCollector.iml" />
+      <module fileurl="file://C:\Users\Dino Felarca\Documents\GitHub\App\StarCollector\StarCollector.iml" filepath="C:\Users\Dino Felarca\Documents\GitHub\App\StarCollector\StarCollector.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\Dino Felarca\Documents\GitHub\App\StarCollector\app\app.iml" filepath="C:\Users\Dino Felarca\Documents\GitHub\App\StarCollector\app\app.iml" />
     </modules>
   </component>
 </project>
