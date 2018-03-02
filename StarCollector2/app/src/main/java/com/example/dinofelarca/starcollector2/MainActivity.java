@@ -1,4 +1,4 @@
-package com.example.dinofelarca.starcollector;
+package com.example.dinofelarca.starcollector2;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -22,6 +22,8 @@ import android.widget.Toast;
 import android.animation.ValueAnimator;
 import android.view.animation.LinearInterpolator;
 
+import java.util.Random;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -35,9 +37,10 @@ public class MainActivity extends AppCompatActivity {
     private Animation.AnimationListener aListener;
     private static Button btn;
     static Boolean isUp = true;
-    private TextView time;
+    private TextView time, points;
     int[] firstPosition = new int[2];
     int[] secondPosition = new int[2];
+    int wLayout, wStar, hLayout, hStar, starX, starY, score;
 
     int timee = 25;
     CountDownTimer countDown;
@@ -50,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         time = (TextView) findViewById(R.id.time);
+        points = (TextView) findViewById(R.id.points);
         star = (ImageView) findViewById(R.id.star);
         ship = (ImageView) findViewById(R.id.ship);
         relLay = (RelativeLayout) findViewById(R.id.layout);
@@ -62,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 timee--;
                 time.setText("" + timee);
+                boolean isOverlap = isViewOverlapping(ship, star);
+                displayScore(score, isOverlap);
             }
 
             @Override
@@ -93,12 +99,16 @@ public class MainActivity extends AppCompatActivity {
                     if (pShip >= wLayout) {
                         ship.setX(dX + 0);
                     }
+
+
                 } else if (sensorEvent.values[1] < -0.1f){
                     ship.setX(dX - 4);
                     if (dX <= 0) {
                         ship.setX(dX - 0);
                     }
+
                 }
+
 
             }
 
@@ -108,17 +118,15 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
+
         btn = (Button) findViewById(R.id.btn);
 
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(isUp){
-                    isUp = false;
-                    star.startAnimation(MainActivity.getVerticalSlideAnimation(0,relLay.getHeight(),6000,0));
-                }else{
-                    isUp = true;
-                    star.startAnimation(MainActivity.getVerticalSlideAnimation(relLay.getHeight(),0,6000,0));
-                }
+                    if (isUp) {
+                        isUp = false;
+                        star.startAnimation(MainActivity.getVerticalSlideAnimation(0, relLay.getBottom() - star.getHeight(), 5000, 0));
+                    }
 
                 countDown.start();
                 btn.setEnabled(false);
@@ -137,6 +145,22 @@ public class MainActivity extends AppCompatActivity {
                 && firstPosition[0] + firstView.getMeasuredWidth() > secondPosition[0]
                 && firstPosition[1] < secondPosition[1] + secondView.getMeasuredHeight()
                 && firstPosition[1] + firstView.getMeasuredHeight() > secondPosition[1];
+    }
+
+    private void displayScore(int number, boolean isOverlap){
+        wLayout = relLay.getWidth();
+        hLayout = relLay.getHeight();
+        wStar = star.getWidth();
+        hStar = star.getHeight();
+        Random rand = new Random();
+        starX = rand.nextInt(wLayout - wStar);
+        starY = rand.nextInt(hLayout - hStar);
+        if(isOverlap == true) {
+            score = score + 1;
+            points.setText("" + score);
+            star.setY(200);
+            star.setX(starX);
+        }
     }
 
     public static Animation getVerticalSlideAnimation(int fromYPosition, final int toYPosition, int duration, int startOffset)

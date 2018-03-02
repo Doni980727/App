@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/layout"
+    tools:context="com.example.dinofelarca.starcollector2.MainActivity">
+
+
+    <TextView
+        android:id="@+id/timer"
+        android:layout_marginLeft="10dp"
+        android:textSize="16dp"
+        android:textAllCaps="true"
+        android:textColor="#000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Timer" />
+
+    <TextView
+        android:id="@+id/time"
+        android:text="25"
+        android:textSize="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/timer"
+        android:layout_marginLeft="10dp"
+        android:textColor="#000"
+        />
+
+    <TextView
+        android:id="@+id/textView"
+        android:textSize="16dp"
+        android:layout_marginRight="10dp"
+        android:textAllCaps="true"
+        android:textColor="#000"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Highscore" />
+
+
+    <TextView
+        android:id="@+id/points"
+        android:textSize="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:textAllCaps="true"
+        android:textColor="#000"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0" />
+
+    <ImageView
+        android:id="@+id/star"
+        android:contentDescription="star"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="75dp"
+        android:src="@drawable/star" />
+
+    <ImageView
+        android:id="@+id/ship"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:contentDescription="@string/app_name"
+        android:cropToPadding="false"
+        android:paddingBottom="10dp"
+        android:src="@drawable/ship2" />
+
+    <Button
+        android:id="@+id/btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/star"
+        android:text="Button" />
+
+
+</RelativeLayout>
