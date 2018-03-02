@@ -35,14 +35,14 @@ public class MainActivity extends AppCompatActivity {
     private RelativeLayout relLay;
     private TranslateAnimation animation;
     private Animation.AnimationListener aListener;
-    private static Button btn;
+    private Button btn;
     static Boolean isUp = true;
     private TextView time, points;
     int[] firstPosition = new int[2];
     int[] secondPosition = new int[2];
     int wLayout, wStar, hLayout, hStar, starX, starY, score;
 
-    int timee = 25;
+    int timee = 60;
     CountDownTimer countDown;
 
 
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         SM = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         gSensor = SM.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
 
-        countDown = new CountDownTimer(25000, 1000) {
+        countDown = new CountDownTimer(60000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 timee--;
@@ -72,6 +72,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+
+                btn.setEnabled(true);
+                btn.setVisibility(View.VISIBLE);
+                timee = 60;
 
             }
         };
@@ -123,13 +127,21 @@ public class MainActivity extends AppCompatActivity {
 
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                    if (isUp) {
-                        isUp = false;
-                        star.startAnimation(MainActivity.getVerticalSlideAnimation(0, relLay.getBottom() - star.getHeight(), 5000, 0));
-                    }
 
+                        star.startAnimation(MainActivity.getVerticalSlideAnimation(0, ship.getY(), 3000, 0));
+
+
+                /*animation = new TranslateAnimation(
+                        TranslateAnimation.ABSOLUTE, 0f,
+                        TranslateAnimation.ABSOLUTE, 0f,
+                        TranslateAnimation.RELATIVE_TO_PARENT, star.getY(),
+                        TranslateAnimation.RELATIVE_TO_PARENT, 0.5f);
+                animation.setDuration(5000);
+                animation.setRepeatCount(-1);
+                star.setAnimation(animation);*/
                 countDown.start();
                 btn.setEnabled(false);
+                btn.setVisibility(View.GONE);
             }
         });
 
@@ -160,14 +172,16 @@ public class MainActivity extends AppCompatActivity {
             points.setText("" + score);
             star.setY(200);
             star.setX(starX);
+            star.startAnimation(getVerticalSlideAnimation(0, ship.getY(), 3000, 0));
         }
     }
 
-    public static Animation getVerticalSlideAnimation(int fromYPosition, final int toYPosition, int duration, int startOffset)
+    public static Animation getVerticalSlideAnimation(float fromYPosition, final float toYPosition, int duration, int startOffset)
     {
         TranslateAnimation translateAnimation = new TranslateAnimation(1, 0.0F, 1, 0.0F, 0, fromYPosition, 0, toYPosition);
         translateAnimation.setDuration(duration);
         translateAnimation.setStartOffset(startOffset);
+
 
         //Stop animation after finishing.
         //translateAnimation.setFillAfter(true);
